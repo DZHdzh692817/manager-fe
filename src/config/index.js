@@ -5,7 +5,7 @@ const env = import.meta.env.MODE || 'prod'//默认生产环境
 const EnvConfig = {
     //开发环境
     dev:{
-        baseApi:'/',
+        baseApi:'/api',
         mockApi:'https://www.fastmock.site/mock/34ddf2567f7741ae154d77373eed4ed9/api'
     },
     //测试环境
@@ -21,7 +21,7 @@ const EnvConfig = {
 }
 export default {
     env,
-    mock:true,
+    mock:false,
     namespace:'manger',//定义一个命名空间 用来对应localStorage
     ...EnvConfig[env]
     //baseApi:'www.baidu.com/api', // test-www.baidu.com/api 
