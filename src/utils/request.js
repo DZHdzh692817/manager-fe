@@ -48,6 +48,9 @@ function request(options) {
     if(options.method.toLowerCase() === 'get') {
         options.params = options.data;
     }
+    if(typeof options.mock != 'undefined') {
+        config.mock = options.mock;
+    }
     //生产环境 就是怕调了mock假数据
     if(config.env === 'prod') {
         service.defaults.baseURL = config.baseApi
