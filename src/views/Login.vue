@@ -4,12 +4,22 @@
             <el-form ref="userForm" :model="user" status-icon :rules="rules">
                 <div class="title">登录</div>
                 <el-form-item prop="userName">
-                    <span class="iconfont icon">&#xe75e;</span>
-                    <el-input type="text" v-model="user.userName"></el-input>
+                    <!-- <span class="iconfont icon">&#xe75e;</span>
+                    <el-input type="text" v-model="user.userName"></el-input> -->
+                    <el-input type="text" v-model="user.userName" placeholder="输入用户名">
+                        <template #prefix>
+                            <el-icon class="el-input__icon"><icon-user /></el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item prop="userPwd">
-                    <span class="iconfont">&#xe607;</span>
-                    <el-input type="password" v-model="user.userPwd"/>
+                    <!-- <span class="iconfont">&#xe607;</span>
+                    <el-input type="password" v-model="user.userPwd"/> -->
+                    <el-input type="password" v-model="user.userPwd" placeholder="输入密码">
+                        <template #prefix>
+                            <el-icon class="el-input__icon"><icon-unlock /></el-icon>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" class="btn-login" @click="login">登录</el-button>
@@ -19,8 +29,10 @@
     </div>
 </template>
 <script>
+import { Unlock as IconUnlock, User as IconUser} from '@element-plus/icons'
 export default {
     name: 'Login',
+    components: { IconUnlock, IconUser },
     data() {
         return {
             user: {
@@ -69,8 +81,10 @@ export default {
         font-size: 30px;
         line-height: 1.5;
         text-align: center;
+        margin-bottom: 20px;
     }
     .btn-login {
+        margin-top: 10px;
         width: 100%;
     }
 }
