@@ -6,7 +6,7 @@
                 <el-form-item prop="userName">
                     <!-- <span class="iconfont icon">&#xe75e;</span>
                     <el-input type="text" v-model="user.userName"></el-input> -->
-                    <el-input type="text" v-model="user.userName" placeholder="输入用户名">
+                    <el-input type="text" v-model="user.userName" ref="input" placeholder="输入用户名">
                         <template #prefix>
                             <el-icon class="el-input__icon"><icon-user /></el-icon>
                         </template>
@@ -44,6 +44,9 @@ export default {
                 userPwd: [{required: true, message: "请输入密码", trigger: "blur"}],
             }
         }
+    },
+    mounted(){
+        this.$refs['input'].focus();
     },
     methods: {
         login() {

@@ -19,6 +19,7 @@
                         <el-icon v-else><fold /></el-icon>
                     </div>
                     <div class="bread">
+                        <!-- 面包屑 -->
                         <BreadCrumb />
                     </div>
                 </div>
@@ -41,7 +42,8 @@
                 </div>
             </div>
             <div class="wrapper">
-                <div class="main-page"><router-view></router-view></div>
+                <!-- <div class="main-page"></div> -->
+                <router-view></router-view>
             </div>
         </div>
     </div>
