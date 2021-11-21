@@ -98,6 +98,7 @@
 
 <script>
 import { onMounted, reactive, ref, toRefs, getCurrentInstance, toRaw } from 'vue'
+import utils from './../utils/utils'
 export default{
     name: 'User',
     setup() {
@@ -105,7 +106,7 @@ export default{
         const { proxy } = getCurrentInstance();// 使用proxy代替ctx，因为ctx只在开发环境有效
         // 初始化用户表单对象
         const user = reactive({
-            state: 0,
+            state: 1,
             userId: '',
             userName: ''//不用写这两个下面...user还能解构了？
         });
@@ -164,8 +165,22 @@ export default{
                     }[value]
                 }
             },
-            {label: '注册时间',prop: 'createTime'},
-            {label: '最后登录时间',prop: 'lastLoginTime'},
+            {
+                label: '注册时间',
+                prop: 'createTime',
+                'width':180,
+                formatter(row, column, value) {
+                    return utils.formateDate(new Date(value))
+                }
+            },
+            {
+                label: '最后登录时间',
+                prop: 'lastLoginTime',
+                'width':180,
+                formatter(row, column, value) {
+                    return utils.formateDate(new Date(value))
+                }
+            },
         ]);
         // 初始化接口调用
         onMounted(()=>{
@@ -207,7 +222,7 @@ export default{
         const handleDel = async (row) => {
             try {
                 await proxy.$api.userDel({
-                    userId: [row.userId]
+                    userIds: [row.userId]
                 })
                 proxy.$message.success('删除成功')
                 getUserList();
@@ -230,9 +245,9 @@ export default{
             }
             try {
                 const res = await proxy.$api.userDel({
-                    userId: checkedUserIds.value
+                    userIds: checkedUserIds.value
                 })
-                if(res.nModified > 0) {
+                if(res.matchedCount > 0) {
                     proxy.$message.success('删除成功')
                     getUserList();
                 } else {
@@ -242,7 +257,7 @@ export default{
         }
         //用户新增
         const handleCreate = () => {
-            action.value = 'create';
+            action.value = 'add';
             showModel.value = true;
         }
         //获取部门列表
@@ -269,12 +284,13 @@ export default{
                     params.userEmail += '@qq.com';
                     params.action = action.value;
                     let res = await proxy.$api.userSubmit(params);//提交到后端
-                    if(res) {
-                        showModel.value = false;
-                        proxy.$message.success('用户创建成功')
-                        handleReset('dialogForm');
-                        getUserList();
-                    }
+                    // if(res) {
+                        
+                    // }
+                    showModel.value = false;
+                    proxy.$message.success('用户创建成功')
+                    handleReset('dialogForm');
+                    getUserList();
                 }
             })
         }
