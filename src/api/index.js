@@ -21,12 +21,12 @@ export default {
         })
     },
     //获取左侧菜单栏列表
-    getMenuList() {
+    getMenuList(params) {
         return request({
             url: '/menu/list',
             method: 'get',
-            data: {},
-            mock: true
+            data: params,
+            mock: false
         })
     },
     //获取用户列表
@@ -73,5 +73,14 @@ export default {
             data: {params},
             mock: false
         })
-    }
+    },
+    //菜单新增/编辑/删除
+    menuSubmit(params) {
+        return request({
+            url: '/menu/operate',
+            method: 'post',
+            data: params,
+            mock: false
+        })
+    },
 }
