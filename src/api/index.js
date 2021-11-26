@@ -48,12 +48,20 @@ export default {
         })
     },
     //获取角色列表
-    getRoleList() {
+    getRoleAllList() {
         return request({
             url: '/roles/allList',
             method: 'get',
             data: {},
-            mock: true
+            mock: false
+        })
+    },
+    getRoleList(params) {
+        return request({
+            url: '/roles/List',
+            method: 'get',
+            data: params,
+            mock: false
         })
     },
     //获取部门列表
@@ -83,4 +91,21 @@ export default {
             mock: false
         })
     },
+    //角色新增 编辑 删除
+    roleOperate(params) {
+        return request({
+            url: '/roles/operate',
+            method: 'post',
+            data: params,
+            mock: false
+        })
+    },
+    updatePermission(params) {
+        return request({
+            url: '/roles/update/permission',
+            method: 'post',
+            data: params,
+            mock: false
+        })
+    }
 }

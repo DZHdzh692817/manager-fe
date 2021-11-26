@@ -60,7 +60,7 @@ export default defineComponent({
     components: { Location, Document, Setting, Expand, Bell, ArrowDown, Fold, TreeMenu,BreadCrumb },
     data() {
         return {
-            userInfo:this.$store.state.userInfo,
+            userInfo:this.$store.state.userInfo || {},
             isCollapse: false,
             noticeCount: 0,
             userMenu: [],
